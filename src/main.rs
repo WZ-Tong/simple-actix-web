@@ -1,12 +1,12 @@
-use actix_web::{web, App, HttpServer};
+use actix_web::{App, HttpServer};
 
-pub mod www;
+pub mod mvc;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .service(web::scope("").configure(www::config))
+            .configure(mvc::configure_controllers)
     })
     .bind(("127.0.0.1", 8080))?
     .run()
